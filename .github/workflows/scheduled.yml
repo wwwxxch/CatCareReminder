@@ -20,4 +20,7 @@ jobs:
       - name: test
         run: python --version; python3 --version
       - name: Call API
+        env:
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_GROUP_ID: ${{ secrets.LINE_GROUP_ID }}
         run: python morningcall.py
