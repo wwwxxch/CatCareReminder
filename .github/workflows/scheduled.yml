@@ -11,16 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Make API Call
-        run: |
-          curl -X POST https://api.line.me/v2/bot/message/push \
-          -H 'Content-Type: application/json' \
-          -H 'Authorization: Bearer ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}' \
-          -d '{
-              "to": "${{ secrets.LINE_GROUP_ID }}",
-              "messages":[
-                  {
-                      "type":"text",
-                      "text":"早上記得清貓沙、換前後的水盆、確定碗中有兩湯匙飼料哦！"
-                  }
-              ]
-          }'
+        # run: |
+        #   curl -X POST https://api.line.me/v2/bot/message/push \
+        #   -H 'Content-Type: application/json' \
+        #   -H 'Authorization: Bearer ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}' \
+        #   -d '{
+        #       "to": "${{ secrets.LINE_GROUP_ID }}",
+        #       "messages":[
+        #           {
+        #               "type":"text",
+        #               "text":"早上記得清貓沙、換前後的水盆、確定碗中有兩湯匙飼料哦！"
+        #           }
+        #       ]
+        #   }'
+        run: echo "Hi, ${{ secrets.TEST_KEY}}"
