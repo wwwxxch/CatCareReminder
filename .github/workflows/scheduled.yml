@@ -1,12 +1,12 @@
 name: Scheduled API Call
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
   workflow_dispatch:
   schedule:
-    - cron: "44 14 * * *"
+    - cron: "30 22 * * *" # 22:30 UTC = 06:30 GMT+8
 
 jobs:
   morning-routines:
