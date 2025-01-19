@@ -11,19 +11,13 @@ on:
 jobs:
   morning-routines:
     name: Morning Routines
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - name: Make API Call
-        run: |
-          curl -X POST https://api.line.me/v2/bot/message/push \
-          -H "Content-Type: application/json" \
-          -H "Authorization: Bearer ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}" \
-          -d "{
-              \"to\": \"${{ secrets.LINE_GROUP_ID }}\",
-              \"messages\": [
-                  {
-                      \"type\": \"text\",
-                      \"text\": \"早上記得清貓沙、換前後的水盆、確定碗中有兩湯匙飼料哦！\"
-                  }
-              ]
-          }"
+      - name: checkout code
+        uses: actions/checkout@v4
+      - name: setup python
+        uses: actions/setup-python@v5
+      - name: test
+        run: python --version; python3 --version
+      - name: Call API
+        run: python morningcall.py
