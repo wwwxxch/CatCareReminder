@@ -1,8 +1,9 @@
 name: Scheduled API Call
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: "38 14 * * *"
+    - cron: "44 14 * * *"
 
 jobs:
   morning-routines:
