@@ -6,19 +6,17 @@ on:
   #     - main
   workflow_dispatch:
   schedule:
-    # - cron: "30 22 * * *" # 22:30 UTC = 06:30 GMT+8
-    # - cron: "30 13 * * *" # 13:30 UTC = 21:30 GMT+8
-    - cron: "17 3 * * *" # 03:17 UTC = 11:17 GMT+8
-    - cron: "27 3 * * *" # 03:27 UTC = 11:27 GMT+8
+    - cron: "30 22 * * *" # 22:30 UTC = 06:30 GMT+8
+    - cron: "30 13 * * *" # 13:30 UTC = 21:30 GMT+8
 
 jobs:
   morning-routines:
     name: Morning Routines
-    if: github.event.schedule == '17 3 * * *'
+    if: github.event.schedule == '30 22 * * *'
     runs-on: ubuntu-24.04
     steps:
       - run: date
-      - name: Make an API call
+      - name: Make an API call (morning)
         run: |
           curl -X POST https://api.line.me/v2/bot/message/push \
           -H "Content-Type: application/json" \
@@ -34,11 +32,11 @@ jobs:
           }'
   night-routines:
     name: Night Routines
-    if: github.event.schedule == '27 3 * * *'
+    if: github.event.schedule == '30 13 * * *'
     runs-on: ubuntu-24.04
     steps:
       - run: date
-      - name: Make an API call
+      - name: Make an API call (night)
         run: |
           curl -X POST https://api.line.me/v2/bot/message/push \
           -H "Content-Type: application/json" \
