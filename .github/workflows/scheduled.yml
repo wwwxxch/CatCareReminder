@@ -8,15 +8,16 @@ on:
   schedule:
     # - cron: "30 22 * * *" # 22:30 UTC = 06:30 GMT+8
     # - cron: "30 13 * * *" # 13:30 UTC = 21:30 GMT+8
-    - cron: "5 2 * * *" # 02:05 UTC = 10:05 GMT+8
-    - cron: "10 2 * * *" # 02:10 UTC = 10:10 GMT+8
+    - cron: "17 3 * * *" # 03:17 UTC = 11:17 GMT+8
+    - cron: "27 3 * * *" # 03:27 UTC = 11:27 GMT+8
 
 jobs:
   morning-routines:
     name: Morning Routines
-    if: github.event.schedule == '5 2 * * *'
+    if: github.event.schedule == '17 3 * * *'
     runs-on: ubuntu-24.04
     steps:
+      - run: date
       - name: Make an API call
         run: |
           curl -X POST https://api.line.me/v2/bot/message/push \
@@ -33,9 +34,10 @@ jobs:
           }'
   night-routines:
     name: Night Routines
-    if: github.event.schedule == '10 2 * * *'
+    if: github.event.schedule == '27 3 * * *'
     runs-on: ubuntu-24.04
     steps:
+      - run: date
       - name: Make an API call
         run: |
           curl -X POST https://api.line.me/v2/bot/message/push \
