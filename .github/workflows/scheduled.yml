@@ -6,11 +6,15 @@ on:
   #     - main
   workflow_dispatch:
   schedule:
-    - cron: "30 22 * * *" # 22:30 UTC = 06:30 GMT+8
+    # - cron: "30 22 * * *" # 22:30 UTC = 06:30 GMT+8
+    # - cron: "30 13 * * *" # 13:30 UTC = 21:30 GMT+8
+    - cron: "5 2 * * *" # 02:05 UTC = 10:05 GMT+8
+    - cron: "10 2 * * *" # 02:10 UTC = 10:10 GMT+8
 
 jobs:
   morning-routines:
     name: Morning Routines
+    if: github.event.schedule == '5 2 * * *'
     runs-on: ubuntu-24.04
     steps:
       - name: Make an API call
@@ -23,7 +27,26 @@ jobs:
               "messages":[
                   {
                       "type":"text",
-                      "text":"早上記得清貓沙、換前後的水盆、確定碗中有兩湯匙飼料哦！"
+                      "text":"早上記得清貓沙、換前後的水盆、出門前確定碗中有兩湯匙飼料哦！"
+                  }
+              ]
+          }'
+  night-routines:
+    name: Night Routines
+    if: github.event.schedule == '10 2 * * *'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Make an API call
+        run: |
+          curl -X POST https://api.line.me/v2/bot/message/push \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}" \
+          -d '{
+              "to": "'"${{ secrets.LINE_GROUP_ID }}"'",
+              "messages":[
+                  {
+                      "type":"text",
+                      "text":"晚上記得清貓沙，睡前碗裡要有兩湯匙飼料，餵1/2罐頭加水給花花！"
                   }
               ]
           }'
