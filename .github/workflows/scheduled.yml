@@ -5,14 +5,14 @@ on:
   #   branches:
   #     - main
   workflow_dispatch:
-  # schedule:
-  #   - cron: "30 22 * * *" # 22:30 UTC = 06:30 GMT+8
-  #   - cron: "30 13 * * *" # 13:30 UTC = 21:30 GMT+8
+  schedule:
+    - cron: "30 22 * * *" # 22:30 UTC = 06:30 GMT+8
+    - cron: "30 13 * * *" # 13:30 UTC = 21:30 GMT+8
 
 jobs:
   morning-routines:
     name: Morning Routines
-    # if: github.event.schedule == '30 22 * * *'
+    if: github.event.schedule == '30 22 * * *'
     runs-on: ubuntu-24.04
     steps:
       - run: date
@@ -32,7 +32,7 @@ jobs:
           }'
   night-routines:
     name: Night Routines
-    # if: github.event.schedule == '30 13 * * *'
+    if: github.event.schedule == '30 13 * * *'
     runs-on: ubuntu-24.04
     steps:
       - run: date
